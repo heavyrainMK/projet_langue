@@ -1,0 +1,19 @@
+# Environnement virtuel
+venv/
+
+# Fichiers Python compilés
+__pycache__/
+*.pyc
+*.pyo
+
+# Données brutes (trop lourdes pour Git)
+donnees/brutes/
+donnees/propres/
+donnees/features/
+
+# Modèles sauvegardés
+modeles/
+
+# Fichiers système
+.DS_Store
+*.log

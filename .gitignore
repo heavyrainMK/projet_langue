@@ -17,3 +17,4 @@ modeles/
 # Fichiers système
 .DS_Store
 *.log
+logs_recolte.txt

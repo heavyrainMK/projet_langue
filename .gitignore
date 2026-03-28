@@ -18,3 +18,4 @@ modeles/
 .DS_Store
 *.log
 logs_recolte.txt
+.vscode/

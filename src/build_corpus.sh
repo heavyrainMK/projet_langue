@@ -12,12 +12,10 @@ fi
 
 LANG=$1
 
-# --- CONFIGURATION DES SOURCES ---
-# Miroir officiel (stable mais parfois bridé)
-# DUMP_URL="https://dumps.wikimedia.org/${LANG}wiki/latest/${LANG}wiki-latest-pages-articles.xml.bz2"
-
-# Miroir Your.org (US, plus rapide)
-DUMP_URL="https://dumps.wikimedia.your.org/${LANG}wiki/latest/${LANG}wiki-latest-pages-articles.xml.bz2"
+# --- CONFIGURATION DES SOURCES (MULTI-MIROIRS) ---
+URL_YOUR="https://dumps.wikimedia.your.org/${LANG}wiki/latest/${LANG}wiki-latest-pages-articles.xml.bz2"
+URL_UMD="https://mirror.umd.edu/wikimedia/dumps/${LANG}wiki/latest/${LANG}wiki-latest-pages-articles.xml.bz2"
+URL_OFF="https://dumps.wikimedia.org/${LANG}wiki/latest/${LANG}wiki-latest-pages-articles.xml.bz2"
 
 DUMP_FILE="donnees/brutes/${LANG}wiki-latest-pages-articles.xml.bz2"
 OUT_DIR="donnees/propres/${LANG}"
@@ -26,16 +24,16 @@ echo "=========================================================="
 echo " TRAITEMENT DE LA LANGUE : $LANG"
 echo "=========================================================="
 
-# [1/5] Téléchargement avec aria2c
-echo "[1/5] Téléchargement stabilisé (aria2)..."
-aria2c -x 5 -s 5 \
+# [1/5] Téléchargement avec aria2c en mode Multi-Sources
+echo "[1/5] Téléchargement stabilisé (aria2 multi-miroirs)..."
+aria2c -x 6 -s 6 \
        --user-agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" \
        --continue=true \
-       --max-connection-per-server=5 \
+       --max-connection-per-server=2 \
        --min-split-size=10M \
        -o "${LANG}wiki-latest-pages-articles.xml.bz2" \
        -d "donnees/brutes/" \
-       "$DUMP_URL"
+       "$URL_YOUR" "$URL_UMD" "$URL_OFF"
 
 # [2/5] Extraction avec WikiExtractor
 echo "[2/5] Extraction et nettoyage des textes (JSON)..."

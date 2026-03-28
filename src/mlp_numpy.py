@@ -192,11 +192,6 @@ class MLP:
         n = X_train.shape[0]
         
         for epoque in range(n_epoques):
-            # Décroissance du taux d'apprentissage toutes les 50 époques
-            if epoque > 0 and epoque % 50 == 0:
-                self.taux *= 0.5
-                if verbose:
-                    print(f"  → Taux d'apprentissage réduit à {self.taux:.4f}")
             # Mélanger les données à chaque époque
             indices = np.random.permutation(n)
             X_melange = X_train[indices]
@@ -270,8 +265,6 @@ if __name__ == "__main__":
     print(f"\nArchitecture : {n_entree} → 128 → 64 → {n_classes}")
     print(f"Nombre de classes : {n_classes}")
     
-    np.random.seed(42)  # Reproductibilité
-
     # Créer et entraîner le modèle
     modele = MLP(
         n_entree=n_entree,
@@ -279,8 +272,8 @@ if __name__ == "__main__":
         taux_apprentissage=0.1
     )
     
-    print("\nEntraînement (200 époques)...")
-    modele.fit(X_train, y_train, X_val, y_val, n_epoques=200, taille_batch=32)
+    print("\nEntraînement (50 époques)...")
+    modele.fit(X_train, y_train, X_val, y_val, n_epoques=50, taille_batch=32)
     
     # Évaluation finale sur le jeu de test
     test_acc = modele.calculer_accuracy(X_test, y_test)

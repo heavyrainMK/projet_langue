@@ -1,9 +1,9 @@
 import os
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'  # Masque les logs inutiles de TensorFlow
 
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense, Dropout, BatchNormalization, Input
-from tensorflow.keras.optimizers import SGD, Adam
+from tensorflow.keras.models import Sequential # type: ignore
+from tensorflow.keras.layers import Dense, Dropout, BatchNormalization, Input # type: ignore
+from tensorflow.keras.optimizers import SGD, Adam # type: ignore
 
 # ==============================================================================
 # FONCTIONS DE CRÉATION DES MODÈLES KERAS

@@ -19,3 +19,6 @@ modeles/
 *.log
 logs_recolte.txt
 .vscode/
+
+# Ignorer tout le dossier du rapport et ses figures
+rapport/
